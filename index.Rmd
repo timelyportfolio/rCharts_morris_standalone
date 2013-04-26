@@ -79,7 +79,7 @@ data(managers)
 
 #get columns 3 through 12 and 14 as statistics with similar ranges
 pastats <- data.frame(table.Stats(managers[,c(1,8,9)])[c(3:12,14),],
-                   stringsAsFactors = FALSE)
+                   stringsAsFactors = FALSE) * 100
 
 #make rownames a column
 pastats <- data.frame(rownames( pastats ), pastats, row.names = NULL)

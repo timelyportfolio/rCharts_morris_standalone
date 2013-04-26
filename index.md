@@ -39,10 +39,10 @@ m1a$set(hideHover = "auto")
 m1a$print()
 ```
 
-<div id='chart2d84742e1e61' class='rChart nvd3Plot morris'></div>
+<div id='chart2d8455d553bc' class='rChart nvd3Plot morris'></div>
 <script type='text/javascript'>
     var chartParams = {
- "element": "chart2d84742e1e61",
+ "element": "chart2d8455d553bc",
 "width":    800,
 "height":    400,
 "xkey": "date",
@@ -2483,7 +2483,7 @@ m1a$print()
 ],
 "pointSize":      0,
 "hideHover": "auto",
-"id": "chart2d84742e1e61",
+"id": "chart2d8455d553bc",
 "labels": [ "ConvertibleArbitrage", "CTAGlobal", "DistressedSecurities", "EmergingMarkets", "EquityMarketNeutral", "EventDriven", "FixedIncomeArbitrage", "GlobalMacro", "Long/ShortEquity", "MergerArbitrage", "RelativeValue", "ShortSelling", "FundsofFunds" ] 
 },
       chartType = [ "Line" ]
@@ -2521,10 +2521,10 @@ m2$set(hideHover = "auto")
 m2$print()
 ```
 
-<div id='chart2d8469ab4819' class='rChart nvd3Plot morris'></div>
+<div id='chart2d842b077f25' class='rChart nvd3Plot morris'></div>
 <script type='text/javascript'>
     var chartParams = {
- "element": "chart2d8469ab4819",
+ "element": "chart2d842b077f25",
 "width":    800,
 "height":    400,
 "xkey": "date",
@@ -2600,7 +2600,7 @@ m2$print()
 "barColors": [ "#35978F", "#DFC27D", "#F6E8C3" ],
 "postUnits": "%",
 "hideHover": "auto",
-"id": "chart2d8469ab4819",
+"id": "chart2d842b077f25",
 "labels": [ "HAM1", "SP500TR", "US10YTR" ] 
 },
       chartType = [ "Bar" ]
@@ -2618,7 +2618,8 @@ data(managers)
 # get columns 3 through 12 and 14 as statistics
 # with similar ranges
 pastats <- data.frame(table.Stats(managers[, c(1, 8, 
-    9)])[c(3:12, 14), ], stringsAsFactors = FALSE)
+    9)])[c(3:12, 14), ], stringsAsFactors = FALSE) * 
+    100
 
 # make rownames a column
 pastats <- data.frame(rownames(pastats), pastats, row.names = NULL)
@@ -2642,10 +2643,10 @@ m3$set(hideHover = "auto")
 m3$print()
 ```
 
-<div id='chart2d846f1042ab' class='rChart nvd3Plot morris'></div>
+<div id='chart2d84402a40e9' class='rChart nvd3Plot morris'></div>
 <script type='text/javascript'>
     var chartParams = {
- "element": "chart2d846f1042ab",
+ "element": "chart2d84402a40e9",
 "width":   1000,
 "height":    400,
 "xkey": "metric",
@@ -2653,75 +2654,75 @@ m3$print()
 "data": [
  {
  "metric": "Minimum",
-"HAM1": -0.0944,
-"SP500TR": -0.1446,
-"US10YTR": -0.0709 
+"HAM1":  -9.44,
+"SP500TR": -14.46,
+"US10YTR":  -7.09 
 },
 {
  "metric": "Quartile 1",
 "HAM1":     -0,
-"SP500TR": -0.0173,
-"US10YTR": -0.0085 
+"SP500TR":  -1.73,
+"US10YTR":  -0.85 
 },
 {
  "metric": "Median",
-"HAM1": 0.0112,
-"SP500TR":  0.011,
-"US10YTR": 0.0044 
+"HAM1":   1.12,
+"SP500TR":    1.1,
+"US10YTR":   0.44 
 },
 {
  "metric": "Arithmetic Mean",
-"HAM1": 0.0111,
-"SP500TR": 0.0087,
-"US10YTR": 0.0044 
+"HAM1":   1.11,
+"SP500TR":   0.87,
+"US10YTR":   0.44 
 },
 {
  "metric": "Geometric Mean",
-"HAM1": 0.0108,
-"SP500TR": 0.0077,
-"US10YTR": 0.0042 
+"HAM1":   1.08,
+"SP500TR":   0.77,
+"US10YTR":   0.42 
 },
 {
  "metric": "Quartile 3",
-"HAM1": 0.0248,
-"SP500TR":  0.038,
-"US10YTR": 0.0167 
+"HAM1":   2.48,
+"SP500TR":    3.8,
+"US10YTR":   1.67 
 },
 {
  "metric": "Maximum",
-"HAM1": 0.0692,
-"SP500TR": 0.0978,
-"US10YTR": 0.0506 
+"HAM1":   6.92,
+"SP500TR":   9.78,
+"US10YTR":   5.06 
 },
 {
  "metric": "SE Mean",
-"HAM1": 0.0022,
-"SP500TR": 0.0038,
-"US10YTR": 0.0018 
+"HAM1":   0.22,
+"SP500TR":   0.38,
+"US10YTR":   0.18 
 },
 {
  "metric": "LCL Mean (0.95)",
-"HAM1": 0.0067,
-"SP500TR": 0.0012,
-"US10YTR": 0.0009 
+"HAM1":   0.67,
+"SP500TR":   0.12,
+"US10YTR":   0.09 
 },
 {
  "metric": "UCL Mean (0.95)",
-"HAM1": 0.0155,
-"SP500TR": 0.0161,
-"US10YTR": 0.0079 
+"HAM1":   1.55,
+"SP500TR":   1.61,
+"US10YTR":   0.79 
 },
 {
  "metric": "Stdev",
-"HAM1": 0.0256,
-"SP500TR": 0.0433,
-"US10YTR": 0.0204 
+"HAM1":   2.56,
+"SP500TR":   4.33,
+"US10YTR":   2.04 
 } 
 ],
 "barColors": [ "#02818A", "#3690C0", "#D0D1E6" ],
 "postUnits": "%",
 "hideHover": "auto",
-"id": "chart2d846f1042ab",
+"id": "chart2d84402a40e9",
 "labels": [ "HAM1", "SP500TR", "US10YTR" ] 
 },
       chartType = [ "Bar" ]
