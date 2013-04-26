@@ -1,0 +1,111 @@
+---
+title       : rCharts using morris.js
+subtitle    : 
+author      : TimelyPortfolio
+framework   : minimal       # {io2012, html5slides, shower, dzslides, ...}
+github: {user: timelyportfolio, repo: rCharts_morris_standalone, branch: "gh-pages"}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [morris]      # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+---
+
+## rCharts morris.js Examples
+morris.js offers some of the best time series handling of all the js libraries provided through rCharts.  This makes it ideal for much of the time-series financial analysis performed in **PerformanceAnalytics**.
+
+### Cumulative Growth Line Chart
+As a first example, let's build a cumulative growth line chart.  It takes only a few lines of code to produce the chart.
+```{r,warning=FALSE,message=FALSE,results="asis",tidy.opts=list(width.cutoff=50)}
+#initial setup
+require(rCharts)
+require(reshape2)
+require(PerformanceAnalytics)
+
+data(edhec)
+
+#nice with Morris that we can do with melt or without
+edhec.df <- data.frame(format( index(edhec), "%Y-%m-%d" ),
+                       apply( 1 + coredata(edhec), MARGIN = 2, FUN = cumprod ),
+                       stringsAsFactors = FALSE)
+colnames(edhec.df) <- c("date",
+                        gsub(x=colnames(edhec),
+                             pattern=" ",
+                             replacement="") )
+
+m1a <- mPlot( x = "date",
+              y = colnames(edhec.df)[2:NCOL(edhec.df)],
+              data = edhec.df,
+              type = "Line")
+m1a$set ( pointSize = 0)
+m1a$set ( hideHover = "auto" )
+m1a$print()
+```
+
+### Grouped Bar of Annual Returns by Year
+As another example, let's look at a grouped bar chart plotting the annual return for each year by manager/index.
+```{r,warning=FALSE,message=FALSE,results="asis",tidy.opts=list(width.cutoff=50)}
+data(managers)
+
+#get calendar year returns so starting at 13
+#monthly returns are 1 through 12
+perf <- data.frame(table.CalendarReturns(managers[,c(1,8,9)])[,13:(12 + NCOL(managers[,c(1,8,9)]))],
+                   stringsAsFactors = FALSE)
+
+#make rownames a column
+perf <- data.frame(rownames( perf ), perf, row.names = NULL)
+#add date to column names and remove . from column names to not confuse js
+colnames( perf ) <- c("date",
+                      gsub(x = colnames( perf[-1] ),
+                         pattern = "[.]",
+                         replacement = "" ) )
+
+#build the plot
+m2 <- mPlot( x = "date", 
+             y = colnames( perf )[-1],
+             data = perf,
+             type = "Bar")
+#not pretty colors but an example how we can specify
+m2$set(barColors = brewer.pal(10, "BrBG")[c(8,4,5)])
+m2$set(postUnits = "%")
+m2$set(hideHover = "auto")
+m2$print()
+```
+
+
+### Grouped Bar Return Statistics
+Another way to use a grouped bar in a manager performance setting might be a look at cumulative or rolling performance statistics.  In this case, the x-axis will be an ordinal scale instead of a date-time scale.
+```{r,warning=FALSE,message=FALSE,results="asis",tidy.opts=list(width.cutoff=50)}
+data(managers)
+
+#get columns 3 through 12 and 14 as statistics with similar ranges
+pastats <- data.frame(table.Stats(managers[,c(1,8,9)])[c(3:12,14),],
+                   stringsAsFactors = FALSE)
+
+#make rownames a column
+pastats <- data.frame(rownames( pastats ), pastats, row.names = NULL)
+#add date to column names and remove . from column names to not confuse js
+colnames( pastats ) <- c("metric",
+                      gsub(x = colnames( pastats[-1] ),
+                           pattern = "[.]",
+                           replacement = "" ) )
+
+#build the plot
+m3 <- mPlot( x = "metric", 
+             y = colnames( pastats )[-1],
+             data = pastats,
+             type = "Bar",
+             width = 1000)
+
+#not pretty colors but an example how we can specify
+m3$set(barColors = brewer.pal(9, "PuBuGn")[c(7,6,3)])
+#set to add % at end
+m3$set(postUnits = "%")
+#set to always show hover
+m3$set(hideHover = 'auto')
+m3$print()
+```
+
+### Comparison to PerformanceAnalytics Charts
+These were minimal examples using no additional javascript programming.  rCharts allows this capability, and I strongly encourage readers to check out these two examples from the package author Ramnath Vaidyanathan [NYT Baseball Strikeout Tutorial](http://ramnathv.github.io/rChartsNYT/) and [Visualizing the Reinhart and Rogoff Public Debt Study](http://glimmer.rstudio.com/ramnathv/rChartsRogoff/).  I will build on these examples to add additional interactivity.
+
+In a future session I will compare the javascript interactive plots to the static graphics from R.  I think most will agree that for most cases an interactive presentation will allow much better analysis and communication.

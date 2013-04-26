@@ -1,0 +1,23 @@
+# morris in R with rCharts
+
+[rCharts](http://ramnathv.github.io/rCharts) provides an interface between R and most popular interactive Javascript visualization libraries.  Here are some quick examples using [morris.js]http://www.oesmith.co.uk/morris.js/index.html) to create some **PerformanceAnalytics** type graphics.  These examples are minimal.  To see a much more complete example, go to [recreate NYT baseball tutorial](http://ramnathv.github.io/rChartsNYT).
+
+To run these, the **runExample** function will produce a fully rendered beautiful HTML page from an .R source file provided by Github.  Each of the .R source files are provided in this repo.  
+
+```
+#to install rCharts if you do not have it uncomment next two lines
+#require(devtools)
+#install_github('rCharts', 'ramnathv')
+require(rCharts)
+
+examples = c("bar_annual.R",      
+             "bar_stats.R",
+             "cumulline_edhec.R")    
+
+#loop through each of the examples and create the HTML chart
+sapply(paste0(
+  "https://raw.github.com/timelyportfolio/rCharts_morris_standalone/master/",
+  examples),
+       FUN = create_chart)
+
+```
